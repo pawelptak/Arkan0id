@@ -103,11 +103,8 @@ namespace TestyGra
             blocknum.ForeColor = ColorTranslator.FromHtml("#800040");
             blocknum.Text = n_blokow.ToString();
             blocknum.BackColor = Color.Transparent;
-            blocknum.Refresh();
-            // blocknum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            blocknum.Refresh();   
             blocknum.Location = new Point(Wid - blocknum.Width / 2, Hei - blocknum.Height * 3);
-
-
         }
 
 
@@ -129,8 +126,7 @@ namespace TestyGra
             //over.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             menu.Controls.Add(over);
 
-            Label exit = new Label();
-            //  exit.Dock = DockStyle.Fill;
+            Label exit = new Label();   
             exit.AutoSize = true;
             exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             exit.Text = "Press X to exit, R to restart";
@@ -154,8 +150,7 @@ namespace TestyGra
             pauza.Text = "PAUSE";
             menu.Controls.Add(pauza);
 
-            Label exit = new Label();
-            //  exit.Dock = DockStyle.Fill;
+            Label exit = new Label();          
             exit.AutoSize = true;
             exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             exit.ForeColor = ColorTranslator.FromHtml("#4d4d4d");
