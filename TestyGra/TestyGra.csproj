@@ -122,6 +122,7 @@
   <ItemGroup>
     <Content Include="Images\kula.PNG" />
     <Content Include="Images\paddle.jpg" />
+    <Content Include="Images\icon.ico" />
     <Content Include="tool3_122846.ico" />
   </ItemGroup>
   <ItemGroup>

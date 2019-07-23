@@ -7,6 +7,8 @@ namespace TestyGra
 {
     public class Level : Form
     {
+        Icon ic = Icon.ExtractAssociatedIcon(@"C:\Users\PC\source\repos\TestyGra\TestyGra\Images\icon.ico");
+        
         protected Ball piuka;
         protected Paletka paleta;
         private Timer timer;
@@ -21,6 +23,7 @@ namespace TestyGra
         private bool isOver = false;
         public Level()
         {
+            this.Icon = ic;
             Controls.Clear();
             DoubleBuffered = true;
 
