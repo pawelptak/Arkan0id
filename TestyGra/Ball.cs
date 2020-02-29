@@ -8,7 +8,7 @@ namespace TestyGra
     {
 
         public int kierPoz = 1;
-        public int kierPio = 1;
+        public int kierPio = -1;
         override public void Ruch(int szerOkna, int wysOkna) //metoda przyjmuje szerokosc i wysokosc okna aby ustalic granice planszy
         {
             //  Width = Wid;
@@ -17,15 +17,13 @@ namespace TestyGra
 
             X = X + Speed * kierPoz;
             Y = Y + Speed * kierPio;
-            if (X + Width >= szerOkna || X < 0) kierPoz *= -1; //wychodzi za granice troche
+            if (X + Width >= szerOkna - 10 || X < 0) kierPoz *= -1; //wychodzi za granice troche
             if (Y + Height >= wysOkna || Y < 0) kierPio *= -1;
 
         }
 
         public Ball(int x, int y) : base(x, y) //przyjmuje wspolrzedne poczatkowe pilki
         {
-            //X = x;
-            // Y = y;
             BackColor = Color.Red;
             Width = 20;
             Height = 20;

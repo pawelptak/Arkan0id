@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -9,7 +10,7 @@ namespace TestyGra
            
         public void Ruch(int szerOkna, int wysOkna, int opcja) //metoda przyjmuje szerokosc i wysokosc okna aby ustalic granice planszy
         {
-          
+         
           switch (opcja){
                 case 1:
                     if (X > 0)
@@ -20,7 +21,7 @@ namespace TestyGra
                     }
                     break;
                 case 2:
-                    if ( X <= szerOkna - Width)
+                    if ( X <= szerOkna - Width-10)
                     {
 
                         X += Speed;
@@ -34,9 +35,8 @@ namespace TestyGra
                     break;
 
             }
-            
-           
 
+          
         }
 
         public Paletka(int x, int y) : base(x, y)
@@ -51,7 +51,7 @@ namespace TestyGra
             Y = y;
             
             BackColor = Color.LightGray;
-
+     
         }
 
     }

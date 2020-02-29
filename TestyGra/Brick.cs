@@ -17,7 +17,7 @@ namespace TestyGra
             Y = y;
 
             BackColor = Color.OrangeRed;
-
+    
         }
 
         public bool CzyZniszczono()

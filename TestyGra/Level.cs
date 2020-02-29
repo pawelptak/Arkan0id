@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -7,7 +8,7 @@ namespace TestyGra
 {
     public class Level : Form
     {
-        Icon ic = Icon.ExtractAssociatedIcon(@"C:\Users\PC\source\repos\TestyGra\TestyGra\Images\icon.ico");
+        Icon ic = Properties.Resources.icon;
         
         protected Ball piuka;
         protected Paletka paleta;
@@ -17,13 +18,12 @@ namespace TestyGra
         private Label blocknum;
         Panel menu;
         private static List<Brick> bloczki;
-        private Label label1;
         private int n_blokow = 0;
         private bool pause = false;
         private bool isOver = false;
         public Level()
         {
-            this.Icon = ic;
+            Icon = ic;
             Controls.Clear();
             DoubleBuffered = true;
 
@@ -36,7 +36,7 @@ namespace TestyGra
 
             timer = new Timer
             {
-                Interval = 10,
+                Interval = 1,
                 Enabled = true
             };
             timer.Tick += Ruch_Tick;
@@ -55,14 +55,16 @@ namespace TestyGra
             MinimizeBox = false;
             bloczki = new List<Brick>();
             Draw_HUD();
-            Draw_Blocks(4);
+            Draw_Blocks(36);
 
             Width = Wid;
             Height = Hei;
 
-            piuka = new Ball(10, 10);
+            piuka = new Ball(Width/2, Height-110);
+            Random random = new Random(); 
+            int r = random.Next(2);
+            if (r == 0) piuka.kierPoz = -1; //losowy kierunek poziomy pilki na poczatku
             paleta = new Paletka(Width / 2, Height - 100);
-
             Controls.Add(blocknum);
             Controls.Add(piuka);
             Controls.Add(paleta);
@@ -71,14 +73,20 @@ namespace TestyGra
         }
 
         private void Draw_Blocks(int n)
-        {
+        {        
             n_blokow = n;
-            int start_x = 300;
+            int start_x = 120;
+            int start_y = 10;
             for (int i = 0; i < n; i++)
             {
-                Brick blok = new Brick(start_x, 10);
+                Brick blok = new Brick(start_x, start_y);
                 bloczki.Add(blok);
-                start_x += blok.Width + 50; //odleglosc miedzy bloczkami               
+                start_x += blok.Width + 10; //odleglosc pozioma miedzy bloczkami     
+                if (start_x >= Wid)
+                {
+                    start_x = 120;
+                    start_y += blok.Height+ 10; // odleglosc pionowa miedzy bloczkami
+                }
 
             }
 
@@ -105,8 +113,7 @@ namespace TestyGra
             blocknum.Font = new System.Drawing.Font("Bahnschrift Semibold", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             blocknum.ForeColor = ColorTranslator.FromHtml("#800040");
             blocknum.Text = n_blokow.ToString();
-            blocknum.BackColor = Color.Transparent;
-            blocknum.Refresh();   
+            blocknum.BackColor = Color.Transparent;     
             blocknum.Location = new Point(Wid - blocknum.Width / 2, Hei - blocknum.Height * 3);
         }
 
@@ -170,11 +177,7 @@ namespace TestyGra
         {
             if (menu.Visible == false)
             {
-                Draw_HUD();
-
-                piuka.Refresh();
-                paleta.Refresh();
-
+                Draw_HUD();       
                 piuka.Ruch(Width, Height);
                 paleta.Ruch(Width, Height, opcja);
                 Physics();
@@ -312,39 +315,11 @@ namespace TestyGra
             }
             br.zniszczono = true;
             n_blokow--;
-            blocknum.Refresh();
             br.Visible = false;
 
 
             return b;
 
         }
-
-        private void InitializeComponent()
-        {
-            this.label1 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(848, 442);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            // 
-            // Level
-            // 
-            this.ClientSize = new System.Drawing.Size(895, 464);
-            this.Controls.Add(this.label1);
-            this.Name = "Level";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
-        }
-
     }
 }
